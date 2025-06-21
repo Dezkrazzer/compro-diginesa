@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>DIGINESA - Home</title>
+    <link rel="icon" href="/assets/diginesa_logo.png" type="image/png" />
+
+    <meta property="og:title" content="DIGINESA" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://diginesa.com" />
+    <meta property="og:image" content="/assets/diginesa_logo.png" />
+    <meta property="og:description" content="A digital community focused on developing projects on online platforms." />
+    <meta name="theme-color" content="#7289da" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        #home {
+            /* Padding atas sudah ada (pt-32, md:pt-40), biarkan itu */
+            min-height: calc(100vh - 64px);
+            /* Contoh: 64px adalah tinggi navbar jika h-16 atau 4rem */
+            /* Jika navbar Anda tinggi 10 (h-10) seperti di gambar, itu sekitar 40px */
+            /* Periksa tinggi navbar Anda. Jika tidak tahu, coba dulu 64px. */
+            /* Anda mungkin perlu menyesuaikan 64px ini secara manual */
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #003063 0%, #004080 100%);
+        }
+
+        .btn-primary {
+            background-color: #eabc47;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #d4a73d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #eabc47;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.03);
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* START: Gaya Baru untuk Intro Logo - MODIFIED FOR SMOOTHER HIDE */
+        #intro-logo-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            /* Transisi untuk transform DAN opacity */
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out, visibility 0s 0.8s;
+            /* visibility berubah setelah transisi selesai */
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+            /* Awalnya terlihat */
+            pointer-events: auto;
+            /* Awalnya bisa diklik */
+        }
+
+        #intro-logo {
+            max-width: 50%;
+            max-height: 50%;
+            /* Transisi untuk transform DAN opacity */
+            transition: transform 0.8s ease-out, opacity 0.8s ease-out;
+            opacity: 1;
+            /* Pastikan logo juga tidak memudar di awal */
+        }
+
+        /* Gaya saat logo intro menghilang dan navbar muncul */
+        body.intro-hidden #intro-logo-container {
+            transform: translateY(-100%);
+            /* Geser ke atas */
+            opacity: 0;
+            /* Memudar */
+            visibility: hidden;
+            /* Sembunyikan setelah opacity 0 */
+            pointer-events: none;
+            /* Nonaktifkan interaksi */
+        }
+
+        body.intro-hidden #intro-logo {
+            transform: scale(0.5);
+            /* Mengecilkan logo */
+            opacity: 0;
+            /* Memudar logo */
+        }
+
+        body.intro-hidden #main-navbar {
+            transform: translateY(0);
+            /* Munculkan navbar */
+        }
+
+        /* Ini akan menyembunyikan navbar di awal */
+        #main-navbar {
+            transform: translateY(-100%);
+            transition: transform 0.8s ease-out;
+        }
+
+        body.no-scroll {
+            overflow: hidden;
+            /* Mencegah scrolling */
+            height: 100vh;
+            /* Memastikan tinggi body sesuai viewport */
+        }
+
+        /* END: Gaya Baru untuk Intro Logo */
+    </style>
+</head>
+<body class="text-gray-800">
+    <div id="intro-logo-container">
+        <img src="/assets/diginesa_panjang.png" alt="Diginesa Full Logo" id="intro-logo">
+    </div>
+    <!-- Navigation -->
+    <nav class="bg-white text-white fixed w-full z-50 shadow-lg">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <img class="h-10" src="/assets/diginesa_panjang.png" alt="DigiNesa Logo">
+                    </a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-black focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex text-black space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                    <a href="#team" class="nav-link">Team</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden text-black md:hidden py-4">
+                <a href="#home" class="block py-2">Home</a>
+                <a href="#about" class="block py-2">About</a>
+                <a href="#services" class="block py-2">Services</a>
+                <a href="#portfolio" class="block py-2">Portfolio</a>
+                <a href="#team" class="block py-2">Team</a>
+                <a href="#contact" class="block py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg text-white min-h-screen pt-32 pb-20 md:pt-40 md:pb-32 h-[800px]">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mt-70 mb-4">Welcome to</h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">Our Company</h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl text-[#eabc47] font-bold leading-tight mb-4">Profile DIGINESA</h1>
+                <p class="text-lg md:text-xl mb-8 opacity-90">We help businesses grow through cutting-edge technology and strategic consulting services tailored to your needs.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="btn-primary text-[#003063] font-semibold py-3 px-8 rounded-full text-center">Get Started</a>
+                    <a href="#services" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-full text-center hover:bg-white hover:text-[#003063] transition">Learn More</a>
+                </div>
+            </div>
+            <div class="pt-70 md:w-1/2 flex justify-end"> <img src="/assets/diginesa_logo.png" alt="Diginesa Logo" 
+         class="rounded-lg hidden md:block h-[500px] w-[500px] animate-float"> </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">About Our Company</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <img src="https://www.unesa.ac.id/images/foto-20-06-2024-07-52-08-5998.png" alt="Our team" class="rounded-lg shadow-lg w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 text-[#003063]">Who We Are</h3>
+                    <p class="text-gray-600 mb-6">Founded in 2010, NexusCorp has grown from a small startup to a leading provider of business solutions with offices in 5 countries. Our team of experts is dedicated to delivering exceptional results for our clients.</p>
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-[#eabc47] flex items-center justify-center mr-4">
+                                <i class="fas fa-lightbulb text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#003063]">Innovation</h4>
+                                <p class="text-gray-600">We constantly push boundaries to create cutting-edge solutions.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-[#eabc47] flex items-center justify-center mr-4">
+                                <i class="fas fa-handshake text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#003063]">Integrity</h4>
+                                <p class="text-gray-600">Honesty and transparency guide all our business relationships.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-[#eabc47] flex items-center justify-center mr-4">
+                                <i class="fas fa-rocket text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-[#003063]">Excellence</h4>
+                                <p class="text-gray-600">We strive for perfection in everything we do.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-block btn-primary text-[#003063] font-semibold py-3 px-8 rounded-full">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Our Services</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">We offer a comprehensive range of services designed to help your business thrive in today's competitive landscape.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">Business Strategy</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive business planning and strategy development to position your company for long-term success.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">Web Development</h3>
+                    <p class="text-gray-600 mb-4">Custom web solutions that are responsive, secure, and designed to convert visitors into customers.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">Mobile Apps</h3>
+                    <p class="text-gray-600 mb-4">Native and cross-platform mobile applications that engage users and drive business growth.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">Cloud Solutions</h3>
+                    <p class="text-gray-600 mb-4">Scalable cloud infrastructure and services to optimize your operations and reduce costs.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-search-dollar text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">Digital Marketing</h3>
+                    <p class="text-gray-600 mb-4">Data-driven marketing strategies that increase brand awareness and generate qualified leads.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-lg shadow-md p-8 transition duration-300">
+                    <div class="w-16 h-16 bg-[#003063] rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-headset text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-[#003063]">IT Consulting</h3>
+                    <p class="text-gray-600 mb-4">Expert guidance to align your technology with business objectives and maximize ROI.</p>
+                    <a href="#" class="text-[#eabc47] font-semibold flex items-center"> Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Stats Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2">250+</div>
+                    <div class="text-[#eabc47] font-medium">Happy Clients</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2">500+</div>
+                    <div class="text-[#eabc47] font-medium">Projects Completed</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2">50+</div>
+                    <div class="text-[#eabc47] font-medium">Team Members</div>
+                </div>
+                <div class="p-4">
+                    <div class="text-4xl font-bold mb-2">10+</div>
+                    <div class="text-[#eabc47] font-medium">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Our Portfolio</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Explore some of our recent projects and see how we've helped businesses like yours succeed.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="relative group overflow-hidden rounded-lg shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 1" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-[#003063] bg-opacity-80 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">E-commerce Platform</h3>
+                        <p class="text-gray-200 text-center mb-4">A custom e-commerce solution that increased sales by 120% in the first quarter.</p>
+                        <a href="#" class="btn-primary text-[#003063] font-semibold py-2 px-6 rounded-full">View Details</a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="relative group overflow-hidden rounded-lg shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Project 2" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-[#003063] bg-opacity-80 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Mobile Banking App</h3>
+                        <p class="text-gray-200 text-center mb-4">A secure banking application with biometric authentication and real-time notifications.</p>
+                        <a href="#" class="btn-primary text-[#003063] font-semibold py-2 px-6 rounded-full">View Details</a>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="relative group overflow-hidden rounded-lg shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Project 3" class="w-full h-64 object-cover transition duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-[#003063] bg-opacity-80 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300 p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Enterprise CRM</h3>
+                        <p class="text-gray-200 text-center mb-4">A comprehensive customer relationship management system for large organizations.</p>
+                        <a href="#" class="btn-primary text-[#003063] font-semibold py-2 px-6 rounded-full">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="inline-block btn-primary text-[#003063] font-semibold py-3 px-8 rounded-full">View All Projects</a>
+            </div>
+        </div>
+    </section>
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Meet Our Team</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Our team of experts is passionate about delivering exceptional results for our clients.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBngVaz7tSw2CaQXVNqw7VJu6Sz99M5U2PQ&s" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#003063] mb-1">John Smith</h3>
+                        <p class="text-[#eabc47] font-medium mb-3">CEO & Founder</p>
+                        <p class="text-gray-600 mb-4">Visionary leader with 15+ years of experience in business strategy and technology.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBngVaz7tSw2CaQXVNqw7VJu6Sz99M5U2PQ&s" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#003063] mb-1">Sarah Johnson</h3>
+                        <p class="text-[#eabc47] font-medium mb-3">CTO</p>
+                        <p class="text-gray-600 mb-4">Technology expert specializing in cloud architecture and scalable systems.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBngVaz7tSw2CaQXVNqw7VJu6Sz99M5U2PQ&s" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#003063] mb-1">Michael Chen</h3>
+                        <p class="text-[#eabc47] font-medium mb-3">Lead Developer</p>
+                        <p class="text-gray-600 mb-4">Full-stack developer with expertise in modern JavaScript frameworks.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Team Member 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBngVaz7tSw2CaQXVNqw7VJu6Sz99M5U2PQ&s" alt="Team Member" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-[#003063] mb-1">Emily Rodriguez</h3>
+                        <p class="text-[#eabc47] font-medium mb-3">Marketing Director</p>
+                        <p class="text-gray-600 mb-4">Digital marketing strategist with a proven track record of driving growth.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-[#003063] hover:text-[#eabc47]"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">What Our Clients Say</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Don't just take our word for it - hear from some of our satisfied clients.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">David Wilson</h4>
+                            <p class="text-gray-500">CEO, TechSolutions</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"NexusCorp transformed our digital presence completely. Their team delivered beyond our expectations with innovative solutions that drove a 75% increase in our online revenue."</p>
+                    <div class="text-[#eabc47]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">Jennifer Lee</h4>
+                            <p class="text-gray-500">Marketing Director, RetailPlus</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"The mobile app developed by NexusCorp has been a game-changer for our business. User engagement has skyrocketed, and customer satisfaction is at an all-time high."</p>
+                    <div class="text-[#eabc47]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" alt="Client" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">Robert Taylor</h4>
+                            <p class="text-gray-500">COO, FinancialServices</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Their cloud migration strategy saved us thousands in operational costs while improving system reliability. NexusCorp is our go-to partner for all technology needs."</p>
+                    <div class="text-[#eabc47]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Get In Touch</h2>
+                <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
+                <p class="max-w-2xl mx-auto mt-6 text-gray-600">Have a project in mind or want to learn more about our services? We'd love to hear from you.</p>
+            </div>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-12 md:mb-0 md:pr-12">
+                    <h3 class="text-2xl font-bold text-[#003063] mb-6">Contact Information</h3>
+                    <div class="flex items-start mb-6">
+                        <div class="w-10 h-10 bg-[#eabc47] rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-map-marker-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">Our Location</h4>
+                            <p class="text-gray-600">123 Business Avenue, Suite 500<br>New York, NY 10001</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start mb-6">
+                        <div class="w-10 h-10 bg-[#eabc47] rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-phone-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">Phone Number</h4>
+                            <p class="text-gray-600">+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-10 h-10 bg-[#eabc47] rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-envelope text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#003063]">Email Address</h4>
+                            <p class="text-gray-600">info@nexuscorp.com<br>support@nexuscorp.com</p>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <h4 class="font-bold text-[#003063] mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-[#003063] rounded-full flex items-center justify-center text-white hover:bg-[#eabc47] transition">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-[#003063] rounded-full flex items-center justify-center text-white hover:bg-[#eabc47] transition">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-[#003063] rounded-full flex items-center justify-center text-white hover:bg-[#eabc47] transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-[#003063] rounded-full flex items-center justify-center text-white hover:bg-[#eabc47] transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <form class="bg-gray-50 p-8 rounded-lg shadow-md">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#eabc47] focus:border-transparent" placeholder="John Doe">
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#eabc47] focus:border-transparent" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#eabc47] focus:border-transparent" placeholder="How can we help?">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#eabc47] focus:border-transparent" placeholder="Your message here..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full btn-primary text-[#003063] font-semibold py-3 px-8 rounded-full">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Newsletter Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Subscribe to Our Newsletter</h2>
+            <p class="max-w-2xl mx-auto mb-8 opacity-90">Stay updated with our latest news, projects, and industry insights. No spam, we promise.</p>
+            <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-full text-gray-800 focus:outline-none">
+                <button class="btn-primary text-[#003063] font-semibold py-3 px-8 rounded-full whitespace-nowrap">Subscribe</button>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4"><span class="text-[#eabc47]">DIGINESA</span>2025</h3>
+                    <p class="text-gray-400 mb-4">Innovative solutions for your business needs. We help companies transform and grow in the digital age.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-[#eabc47]"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#eabc47]"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#eabc47]"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#eabc47]"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-[#eabc47]">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white">Portfolio</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-[#eabc47]">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Business Strategy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Mobile Apps</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-[#eabc47]">Contact Info</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 mt-1 text-[#eabc47]"></i>
+                            <span>Jl. Raya Maospati-Barat No. 358-360<br>Maospati, Magetan</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-[#eabc47]"></i>
+                            <span>+62 1234 234</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-[#eabc47]"></i>
+                            <span>info@diginesa.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 DIGINESA. All Rights Reserved. | Designed with <i class="fas fa-heart text-[#eabc47]"></i> by DIGINESA Team</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 bg-[#eabc47] text-[#003063] rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Back to Top Button
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add active class to current navigation link
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-[#eabc47]');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-[#eabc47]');
+                }
+            });
+        });
+
+        /* START: JavaScript Baru untuk Intro Logo - FINAL MODIFIED & SCROLL LOCK */
+        document.addEventListener('DOMContentLoaded', () => {
+            const introLogoContainer = document.getElementById('intro-logo-container');
+            const mainNavbar = document.getElementById('main-navbar');
+            const body = document.body;
+
+            // 1. Kunci scroll saat DOMContentLoaded
+            body.classList.add('no-scroll');
+
+            // Sembunyikan navbar di awal
+            if (mainNavbar) {
+                mainNavbar.style.transform = 'translateY(-100%)';
+            }
+
+            // 2. Tentukan kapan animasi intro selesai dan scroll dilepaskan
+            // Opsi A: Otomatis hilang setelah beberapa detik (direkomendasikan untuk pengalaman yang mulus)
+            const autoHideDelay = 1000; // 2 detik, sesuaikan
+            const transitionDuration = 800; // Durasi transisi CSS (0.8s)
+
+            setTimeout(() => {
+                // Picu animasi intro menghilang
+                body.classList.add('intro-hidden');
+
+                // Setelah transisi selesai, lepaskan scroll dan hapus elemen intro
+                setTimeout(() => {
+                    body.classList.remove('no-scroll'); // Lepaskan kunci scroll
+                    if (introLogoContainer) {
+                        introLogoContainer.remove(); // Hapus elemen dari DOM
+                    }
+                }, transitionDuration); // Tunggu sampai animasi opacity/transform selesai
+
+            }, autoHideDelay); // Mulai proses menghilang setelah delay awal
+
+            // Opsi B: Animasi hilang ketika user mulai scroll (alternatif, jika tidak ingin otomatis)
+            // Jika Anda menggunakan Opsi A, Anda BISA mengomentari/menghapus Opsi B.
+            // Jika menggunakan Opsi B, Anda perlu sedikit mengubah logika Opsi A atau menghapusnya.
+
+            /*
+            window.addEventListener('scroll', function triggerIntroEffect() {
+                const scrollThreshold = 1; // Sangat kecil, mendeteksi scroll pertama
+    
+                // Pastikan elemen introLogoContainer ada dan user sudah scroll cukup jauh
+                // Dan pastikan body masih dalam kondisi no-scroll (belum dilepas)
+                if (introLogoContainer && body.classList.contains('no-scroll') && window.scrollY > scrollThreshold) {
+                    // Picu animasi intro menghilang
+                    body.classList.add('intro-hidden');
+                    
+                    // Setelah transisi selesai, lepaskan scroll dan hapus elemen intro
+                    setTimeout(() => {
+                        body.classList.remove('no-scroll'); // Lepaskan kunci scroll
+                        if (introLogoContainer) {
+                            introLogoContainer.remove(); 
+                        }
+                    }, transitionDuration); 
+    
+                    // Hapus event listener ini setelah dipicu sekali
+                    window.removeEventListener('scroll', triggerIntroEffect);
+                }
+            });
+            */
+        });
+        /* END: JavaScript Baru untuk Intro Logo - FINAL MODIFIED & SCROLL LOCK */
+    </script>
+</body>
+</html>
