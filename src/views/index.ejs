@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>DIGINESA - Home</title>
     <link rel="icon" href="/assets/diginesa_logo.png" type="image/png" />
-
     <meta property="og:title" content="DIGINESA" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://diginesa.com" />
     <meta property="og:image" content="/assets/diginesa_logo.png" />
     <meta property="og:description" content="A digital community focused on developing projects on online platforms." />
     <meta name="theme-color" content="#7289da" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script>
+        AOS.init({
+            duration: 900,  // durasi animasi
+            once: true      // hanya animasi 1x saat masuk viewport
+        });
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
@@ -212,7 +216,7 @@
     </nav>
     <!-- Hero Section -->
     <section id="home" class="gradient-bg text-white min-h-screen pt-32 pb-20 md:pt-40 md:pb-32 h-[800px]">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center" data-aos="fade-up">
             <div class="md:w-1/2 mb-12 md:mb-0">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mt-70 mb-4">Welcome to</h1>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4">Our Company</h1>
@@ -223,13 +227,12 @@
                     <a href="#services" class="border-2 border-white text-white font-semibold py-3 px-8 rounded-full text-center hover:bg-white hover:text-[#003063] transition">Learn More</a>
                 </div>
             </div>
-            <div class="pt-70 md:w-1/2 flex justify-end"> <img src="/assets/diginesa_logo.png" alt="Diginesa Logo" 
-         class="rounded-lg hidden md:block h-[500px] w-[500px] animate-float"> </div>
+            <div class="pt-70 md:w-1/2 flex justify-end"> <img src="/assets/diginesa_logo.png" alt="Diginesa Logo" class="rounded-lg hidden md:block h-[500px] w-[500px] animate-float"> </div>
         </div>
     </section>
     <!-- About Section -->
     <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">About Our Company</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -240,7 +243,7 @@
                 </div>
                 <div class="md:w-1/2">
                     <h3 class="text-2xl font-bold mb-4 text-[#003063]">Who We Are</h3>
-                    <p class="text-gray-600 mb-6">Founded in 2010, NexusCorp has grown from a small startup to a leading provider of business solutions with offices in 5 countries. Our team of experts is dedicated to delivering exceptional results for our clients.</p>
+                    <p class="text-gray-600 mb-6">Founded in 2010, Diginesa has grown from a small startup to a leading provider of business solutions with offices in 5 countries. Our team of experts is dedicated to delivering exceptional results for our clients.</p>
                     <div class="mb-6">
                         <div class="flex items-center mb-4">
                             <div class="w-12 h-12 rounded-full bg-[#eabc47] flex items-center justify-center mr-4">
@@ -277,7 +280,7 @@
     </section>
     <!-- Services Section -->
     <section id="services" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Our Services</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -349,7 +352,7 @@
     </section>
     <!-- Stats Section -->
     <section class="gradient-bg text-white py-16">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="p-4">
                     <div class="text-4xl font-bold mb-2">250+</div>
@@ -372,7 +375,7 @@
     </section>
     <!-- Portfolio Section -->
     <section id="portfolio" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Our Portfolio</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -414,7 +417,7 @@
     </section>
     <!-- Team Section -->
     <section id="team" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Meet Our Team</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -482,7 +485,7 @@
     </section>
     <!-- Testimonials Section -->
     <section class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">What Our Clients Say</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -500,7 +503,7 @@
                             <p class="text-gray-500">CEO, TechSolutions</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6">"NexusCorp transformed our digital presence completely. Their team delivered beyond our expectations with innovative solutions that drove a 75% increase in our online revenue."</p>
+                    <p class="text-gray-600 mb-6">"Diginesa transformed our digital presence completely. Their team delivered beyond our expectations with innovative solutions that drove a 75% increase in our online revenue."</p>
                     <div class="text-[#eabc47]">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -520,7 +523,7 @@
                             <p class="text-gray-500">Marketing Director, RetailPlus</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6">"The mobile app developed by NexusCorp has been a game-changer for our business. User engagement has skyrocketed, and customer satisfaction is at an all-time high."</p>
+                    <p class="text-gray-600 mb-6">"The mobile app developed by Diginesa has been a game-changer for our business. User engagement has skyrocketed, and customer satisfaction is at an all-time high."</p>
                     <div class="text-[#eabc47]">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -540,7 +543,7 @@
                             <p class="text-gray-500">COO, FinancialServices</p>
                         </div>
                     </div>
-                    <p class="text-gray-600 mb-6">"Their cloud migration strategy saved us thousands in operational costs while improving system reliability. NexusCorp is our go-to partner for all technology needs."</p>
+                    <p class="text-gray-600 mb-6">"Their cloud migration strategy saved us thousands in operational costs while improving system reliability. Diginesa is our go-to partner for all technology needs."</p>
                     <div class="text-[#eabc47]">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -554,7 +557,7 @@
     </section>
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#003063]">Get In Touch</h2>
                 <div class="w-20 h-1 bg-[#eabc47] mx-auto"></div>
@@ -569,7 +572,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-[#003063]">Our Location</h4>
-                            <p class="text-gray-600">123 Business Avenue, Suite 500<br>New York, NY 10001</p>
+                            <p class="text-gray-600">Jl. Raya Maospati-Barat No. 358-360<br>Maospati, Magetan</p>
                         </div>
                     </div>
                     <div class="flex items-start mb-6">
@@ -578,7 +581,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-[#003063]">Phone Number</h4>
-                            <p class="text-gray-600">+1 (555) 123-4567<br>Mon-Fri, 9am-6pm EST</p>
+                            <p class="text-gray-600">+62 123 123<br>Mon-Fri, 9am-6pm WIB</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -587,7 +590,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-[#003063]">Email Address</h4>
-                            <p class="text-gray-600">info@nexuscorp.com<br>support@nexuscorp.com</p>
+                            <p class="text-gray-600">info@diginesa.com<br>support@diginesa.com</p>
                         </div>
                     </div>
                     <div class="mt-8">
@@ -634,7 +637,7 @@
     </section>
     <!-- Newsletter Section -->
     <section class="gradient-bg text-white py-16">
-        <div class="container mx-auto px-6 text-center">
+        <div class="container mx-auto px-6 text-center" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Subscribe to Our Newsletter</h2>
             <p class="max-w-2xl mx-auto mb-8 opacity-90">Stay updated with our latest news, projects, and industry insights. No spam, we promise.</p>
             <div class="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
@@ -645,7 +648,7 @@
     </section>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6" data-aos="fade-up">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4"><span class="text-[#eabc47]">DIGINESA</span>2025</h3>
